@@ -1,121 +1,107 @@
-/// @ref core
-/// @file glm/vector_relational.hpp
+/// @ref ext_vector_relational
+/// @file glm/ext/vector_relational.hpp
 ///
-/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+/// @see core (dependence)
+/// @see ext_scalar_integer (dependence)
 ///
-/// @defgroup core_func_vector_relational Vector Relational Functions
-/// @ingroup core
+/// @defgroup ext_vector_relational GLM_EXT_vector_relational
+/// @ingroup ext
 ///
-/// Relational and equality operators (<, <=, >, >=, ==, !=) are defined to
-/// operate on scalars and produce scalar Boolean results. For vector results,
-/// use the following built-in functions.
+/// Exposes comparison functions for vector types that take a user defined epsilon values.
 ///
-/// In all cases, the sizes of all the input and return vectors for any particular
-/// call must match.
+/// Include <glm/ext/vector_relational.hpp> to use the features of this extension.
 ///
-/// Include <glm/vector_relational.hpp> to use these core features.
-///
-/// @see ext_vector_relational
+/// @see core_vector_relational
+/// @see ext_scalar_relational
+/// @see ext_matrix_relational
 
 #pragma once
 
-#include "detail/qualifier.hpp"
-#include "detail/setup.hpp"
+// Dependencies
+#include "../detail/qualifier.hpp"
+
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
+#	pragma message("GLM: GLM_EXT_vector_relational extension included")
+#endif
 
 namespace glm
 {
-	/// @addtogroup core_func_vector_relational
+	/// @addtogroup ext_vector_relational
 	/// @{
 
-	/// Returns the component-wise comparison result of x < y.
+	/// Returns the component-wise comparison of |x - y| < epsilon.
+	/// True if this expression is satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	/// @tparam T A floating-point or integer scalar type.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/lessThan.xml">GLSL lessThan man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point or integer scalar types
+	/// @tparam Q Value from qualifier enum
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> lessThan(vec<L, T, Q> const& x, vec<L, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> equal(vec<L, T, Q> const& x, vec<L, T, Q> const& y, T epsilon);
 
-	/// Returns the component-wise comparison of result x <= y.
+	/// Returns the component-wise comparison of |x - y| < epsilon.
+	/// True if this expression is satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	/// @tparam T A floating-point or integer scalar type.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/lessThanEqual.xml">GLSL lessThanEqual man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point or integer scalar types
+	/// @tparam Q Value from qualifier enum
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> lessThanEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> equal(vec<L, T, Q> const& x, vec<L, T, Q> const& y, vec<L, T, Q> const& epsilon);
 
-	/// Returns the component-wise comparison of result x > y.
+	/// Returns the component-wise comparison of |x - y| >= epsilon.
+	/// True if this expression is not satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	/// @tparam T A floating-point or integer scalar type.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/greaterThan.xml">GLSL greaterThan man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point or integer scalar types
+	/// @tparam Q Value from qualifier enum
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> greaterThan(vec<L, T, Q> const& x, vec<L, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> notEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y, T epsilon);
 
-	/// Returns the component-wise comparison of result x >= y.
+	/// Returns the component-wise comparison of |x - y| >= epsilon.
+	/// True if this expression is not satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	/// @tparam T A floating-point or integer scalar type.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/greaterThanEqual.xml">GLSL greaterThanEqual man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point or integer scalar types
+	/// @tparam Q Value from qualifier enum
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> greaterThanEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> notEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y, vec<L, T, Q> const& epsilon);
 
-	/// Returns the component-wise comparison of result x == y.
+	/// Returns the component-wise comparison between two vectors in term of ULPs.
+	/// True if this expression is satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	/// @tparam T A floating-point, integer or bool scalar type.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/equal.xml">GLSL equal man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point
+	/// @tparam Q Value from qualifier enum
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> equal(vec<L, T, Q> const& x, vec<L, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> equal(vec<L, T, Q> const& x, vec<L, T, Q> const& y, int ULPs);
 
-	/// Returns the component-wise comparison of result x != y.
+	/// Returns the component-wise comparison between two vectors in term of ULPs.
+	/// True if this expression is satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	/// @tparam T A floating-point, integer or bool scalar type.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/notEqual.xml">GLSL notEqual man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point
+	/// @tparam Q Value from qualifier enum
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> notEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> equal(vec<L, T, Q> const& x, vec<L, T, Q> const& y, vec<L, int, Q> const& ULPs);
 
-	/// Returns true if any component of x is true.
+	/// Returns the component-wise comparison between two vectors in term of ULPs.
+	/// True if this expression is not satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/any.xml">GLSL any man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
-	template<length_t L, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR bool any(vec<L, bool, Q> const& v);
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point
+	/// @tparam Q Value from qualifier enum
+	template<length_t L, typename T, qualifier Q>
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> notEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y, int ULPs);
 
-	/// Returns true if all components of x are true.
+	/// Returns the component-wise comparison between two vectors in term of ULPs.
+	/// True if this expression is not satisfied.
 	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/all.xml">GLSL all man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
-	template<length_t L, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR bool all(vec<L, bool, Q> const& v);
-
-	/// Returns the component-wise logical complement of x.
-	/// /!\ Because of language incompatibilities between C++ and GLSL, GLM defines the function not but not_ instead.
-	///
-	/// @tparam L An integer between 1 and 4 included that qualify the dimension of the vector.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/not.xml">GLSL not man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.7 Vector Relational Functions</a>
-	template<length_t L, qualifier Q>
-	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> not_(vec<L, bool, Q> const& v);
+	/// @tparam L Integer between 1 and 4 included that qualify the dimension of the vector
+	/// @tparam T Floating-point
+	/// @tparam Q Value from qualifier enum
+	template<length_t L, typename T, qualifier Q>
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<L, bool, Q> notEqual(vec<L, T, Q> const& x, vec<L, T, Q> const& y, vec<L, int, Q> const& ULPs);
 
 	/// @}
 }//namespace glm
 
-#include "detail/func_vector_relational.inl"
+#include "vector_relational.inl"
